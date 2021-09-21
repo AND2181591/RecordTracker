@@ -1,0 +1,19 @@
+<mat-form-field>
+    <mat-label>{{ label }}</mat-label>
+    <input
+        matInput
+        [formControl]="control"
+        [type]="type" 
+        [placeholder]="placeholder">
+    <mat-error *ngIf="showErrors() && controlName === 'email'">
+        Please enter a valid email address
+    </mat-error>
+
+    <mat-error *ngIf="showErrors() && controlName === 'username'">
+        Please enter a valid username
+    </mat-error>
+
+    <mat-error *ngIf="showErrors() && controlName === 'password'">
+        Please enter a valid password
+    </mat-error>
+</mat-form-field>

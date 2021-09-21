@@ -1,0 +1,21 @@
+h1 {
+    font-size: 1.7rem;
+    margin-left: 10px;
+}
+
+mat-sidenav-container, mat-sidenav, mat-sidenav-content {
+    height: 100%;
+}
+
+mat-sidenav {
+    width: 200px;
+}
+
+mat-list {
+    padding: 20px 10px;
+}
+
+.nav {
+    text-decoration: none;
+    color: black;
+}

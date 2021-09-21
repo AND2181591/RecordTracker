@@ -1,0 +1,30 @@
+<h3>Sign In</h3>
+
+<form 
+    (ngSubmit)="onSubmit()" 
+    [formGroup]="signInForm"
+    fxLayout="column"
+    fxLayoutAlign="center center">
+
+    <app-input 
+        [control]="signInForm.get('email')"
+        controlName="email"
+        label="Email" 
+        type="email"
+        placeholder="Ex. me@myemail.com">
+    </app-input> 
+
+    <app-input 
+        [control]="signInForm.get('password')"
+        controlName="password"
+        label="Password" 
+        type="password" 
+        placeholder="Recordcollector">
+    </app-input>
+
+    
+    <button 
+        mat-raised-button 
+        color="primary"
+        [disabled]="!signInForm.valid">Submit</button>
+</form>
