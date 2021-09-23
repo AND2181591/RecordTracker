@@ -1,10 +1,10 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav>
         <mat-list>
-            <mat-list-item>
+            <mat-list-item *ngIf="!isLoggedIn">
                 <a routerLink="/" class="nav" (click)="sidenav.close()">Sign In</a>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="!isLoggedIn">
                 <a routerLink="signup" class="nav" (click)="sidenav.close()">Sign Up</a>
             </mat-list-item>
 

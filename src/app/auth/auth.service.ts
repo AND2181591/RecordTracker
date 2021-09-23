@@ -74,12 +74,12 @@ export class AuthService {
     signIn(signInForm: SignInForm) {
         return this.afAuth.signInWithEmailAndPassword(signInForm.email, signInForm.password)
         .then((result) => {
-            // this.ngZone.run(() => {
-            // this.router.navigate(['dashboard']);
-            // });
             this.isUserData.next(true);
-            this.router.navigateByUrl("/home");
-            this.setUserData(result.user!);
+            this.setUserData(result.user!)
+                .then(() => {
+                    this.router.navigate(["/home"]);
+                    console.log("logged in");
+                });
         }).catch((error) => {
             window.alert(error.message)
         });
