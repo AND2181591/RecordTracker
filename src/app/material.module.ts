@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MatListModule } from '@angular/material/list';
         MatToolbarModule, 
         MatIconModule, 
         MatSidenavModule, 
-        MatListModule
+        MatListModule, 
+        MatAutocompleteModule
     ], 
     exports: [
         MatFormFieldModule, 
@@ -26,7 +28,8 @@ import { MatListModule } from '@angular/material/list';
         MatToolbarModule, 
         MatIconModule, 
         MatSidenavModule, 
-        MatListModule
+        MatListModule, 
+        MatAutocompleteModule
     ]
 })
 export class MaterialModule {}

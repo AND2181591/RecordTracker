@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false, 
+  clientId: 'b1d52191336e4954a4f5518f6c68642b', 
+  clientSecret: '058ffec6ee794eb681507a3762f03c19', 
   firebaseConfig: {
     apiKey: "AIzaSyDgtDEDhVJHEBumcIU_09MO3l68738fh0c",
     authDomain: "trackmyrecords-b251a.firebaseapp.com",

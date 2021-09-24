@@ -44,26 +44,11 @@ export class AuthService {
                 localStorage.setItem('user', JSON.stringify(this.userData));
                 JSON.parse(localStorage.getItem('user') || 'null');
                 this.isUserData.next(true);
-                console.log("You are still logged in", this.userData);
             } else {
                 localStorage.setItem('user', '');
                 JSON.parse(localStorage.getItem('user') || 'null');
                 this.isUserData.next(false);
-                console.log("You are no longer logged in", this.userData);
             }
-            // setTimeout(() => {
-            //     if (user) {
-            //         this.userData = user;
-            //         localStorage.setItem('user', JSON.stringify(this.userData));
-            //         JSON.parse(localStorage.getItem('user') || 'null');
-            //         console.log("You are still logged in", this.userData);
-            //     } else {
-            //         localStorage.setItem('user', '');
-            //         JSON.parse(localStorage.getItem('user') || 'null');
-            //         console.log("You are no longer logged in", this.userData);
-            //     }
-            // }, 1000);
-            
         });
     }
 
@@ -77,30 +62,24 @@ export class AuthService {
             this.isUserData.next(true);
             this.setUserData(result.user!)
                 .then(() => {
-                    this.router.navigate(["/home"]);
-                    console.log("logged in");
+                    this.router.navigateByUrl("/home");
                 });
         }).catch((error) => {
             window.alert(error.message)
         });
-    } 
-
-
+    }
 
 
     // Sign up with email/password
     signUp(signUpForm: SignUpForm) {
         return this.afAuth.createUserWithEmailAndPassword(signUpForm.email, signUpForm.password)
         .then((result) => {
-            /* Call the SendVerificaitonMail() function when new user sign 
-            up and returns promise */
-            // this.sendVerificationMail();
             this.isUserData.next(true);
-            this.router.navigateByUrl("/home");
+            this.setUserData(result.user!);
             result.user?.updateProfile({
                 displayName: signUpForm.username
             }).then(() => {
-                this.setUserData(result.user!);
+                this.router.navigateByUrl("/home");
             });
         }).catch((error) => {
             window.alert(error.message)
