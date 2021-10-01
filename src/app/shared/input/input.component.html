@@ -1,10 +1,19 @@
 <mat-form-field>
     <mat-label>{{ label }}</mat-label>
     <input
+        #search
         matInput
         [formControl]="control"
         [type]="type" 
-        [placeholder]="placeholder">
+        [placeholder]="placeholder"
+        [matAutocomplete]="auto">
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelect($event.option.value)">
+        <mat-option *ngFor="let option of options" [value]="option">
+            {{ option.name }}
+        </mat-option>
+    </mat-autocomplete>
+
     <mat-error *ngIf="showErrors() && controlName === 'email'">
         Please enter a valid email address
     </mat-error>

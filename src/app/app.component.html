@@ -9,6 +9,15 @@
             </mat-list-item>
 
             <mat-list-item *ngIf="isLoggedIn">
+                <a routerLink="/home" class="nav" (click)="sidenav.close()">Home</a>
+            </mat-list-item>
+            <mat-list-item *ngIf="isLoggedIn">
+                <a routerLink="/shipped" class="nav" (click)="sidenav.close()">Shipped</a>
+            </mat-list-item>
+            <mat-list-item *ngIf="isLoggedIn">
+                <a routerLink="/preordered" class="nav" (click)="sidenav.close()">Preordered</a>
+            </mat-list-item>
+            <mat-list-item *ngIf="isLoggedIn">
                 <a routerLink="/signout" class="nav" (click)="sidenav.close()">Sign Out</a>
             </mat-list-item>
         </mat-list>
@@ -23,7 +32,9 @@
                     <h1>Record Tracker</h1>
                 </span>
             </mat-toolbar>
-            <router-outlet></router-outlet>
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
         </main>
     </mat-sidenav-content>
 </mat-sidenav-container>

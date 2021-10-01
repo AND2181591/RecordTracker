@@ -8,6 +8,18 @@ const routes: Routes = [
     canLoad: [AuthGuard], 
     loadChildren: () => 
       import('./home/home.module').then(m => m.HomeModule)
+  }, 
+  {
+    path: 'shipped', 
+    canLoad: [AuthGuard], 
+    loadChildren: () => 
+      import('./shipped/shipped.module').then(m => m.ShippedModule)
+  }, 
+  {
+    path: 'preordered', 
+    canLoad: [AuthGuard], 
+    loadChildren: () => 
+      import('./preordered/preordered.module').then(m => m.PreorderedModule)
   }
 ];
 

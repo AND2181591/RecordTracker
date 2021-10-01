@@ -1,1 +1,12 @@
-<p>search works!</p>
+<form [formGroup]="searchForm">
+
+    <app-input
+        [control]="searchForm.get('query')"
+        controlName="search"
+        label="Search by Artist"
+        type="text"
+        [options]="results"
+        (selection)="onSubmit($event)">
+    </app-input>
+
+</form>

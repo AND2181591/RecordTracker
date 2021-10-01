@@ -1,15 +1,22 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 
-import { of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { environment } from "src/environments/environment";
 import { AlbumResults } from '../shared/models/AlbumResults';
+import { Artist } from "../shared/models/Artist";
 
 
 interface AccessToken {
   access_token: string;
+}
+
+interface Artists {
+  artists: {
+    items: Artist[]
+  }
 }
 
 
@@ -43,22 +50,27 @@ export class SearchService {
   }
 
 
-  searchMusic(query: string, type = 'artist', authToken: string) {
-    if (!query) { // This will handle the cases of an empty string within the input. Will return an empty observable.
-      return of({});
-    }
+  searchMusic(query: string, type = 'artist', authToken: string): Observable<Artists> {
     
+    let searchUrl = `${this.rootUrl}/v1/search?query=` + query + '&offset=0&limit=20&type=' + type + '&market=US';
+
     let headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + authToken);
 
-    let searchUrl = `${this.rootUrl}/v1/search?query=` + query + '&offset=0&limit=20&type=' + type + '&market=US';
-
-    return this.http.get(searchUrl, { headers: headers })
+    return this.http.get<Artists>(searchUrl, { headers: headers })
       .pipe(
-        catchError(err => {
-          return err
-        })
-      );
+        catchError(this.handleError)
+      )
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error("An error occurred:", error.error);
+    } else {
+      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+    }
+
+    return throwError("Something bad happened; please try again later.");
   }
 
 

@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatIconModule, 
         MatSidenavModule, 
         MatListModule, 
-        MatAutocompleteModule
+        MatAutocompleteModule, 
+        MatCardModule, 
+        MatDialogModule
     ], 
     exports: [
         MatFormFieldModule, 
@@ -29,7 +33,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatIconModule, 
         MatSidenavModule, 
         MatListModule, 
-        MatAutocompleteModule
+        MatAutocompleteModule, 
+        MatCardModule, 
+        MatDialogModule
     ]
 })
 export class MaterialModule {}

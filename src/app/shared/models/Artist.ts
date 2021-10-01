@@ -6,5 +6,5 @@ export interface Artist {
     images: [{
         url: string;
     }];
-    albums: Album[];
+    albums?: Album[];
 }

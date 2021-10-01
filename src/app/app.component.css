@@ -19,3 +19,7 @@ mat-list {
     text-decoration: none;
     color: black;
 }
+
+.container {
+    padding: 0 30px;
+}
