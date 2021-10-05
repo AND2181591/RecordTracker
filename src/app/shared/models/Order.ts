@@ -1,5 +1,4 @@
 export interface Order {
-    id: string;
     artistName: string;
     album: string;
     image: string;

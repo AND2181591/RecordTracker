@@ -1,0 +1,12 @@
+.order {
+    margin: 20px 0;
+}
+
+mat-card-header {
+    width: 100%;
+}
+
+.album h3 {
+    margin: 5px;
+    text-align: center;
+}

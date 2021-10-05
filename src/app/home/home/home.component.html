@@ -6,7 +6,11 @@
     
     <app-search (artist)="artist = $event"></app-search>
 
-    <mat-card *ngIf="artist.name" (click)="onArtistSelect()">
+    <mat-card 
+        fxLayout="column" 
+        fxLayoutAlign="center center"
+        *ngIf="artist.name" 
+        (click)="onArtistSelect(artist)">
         <mat-card-header>
             <mat-card-title>{{ artist.name }}</mat-card-title>
         </mat-card-header>

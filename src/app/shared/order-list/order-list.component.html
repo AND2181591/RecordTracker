@@ -1,0 +1,22 @@
+<mat-card 
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    class="order"
+    *ngFor="let order of orders">
+    <mat-card-header 
+        fxLayout="row"
+        fxLayoutAlign="space-between">
+        <mat-card-title>{{ order.artistName }}</mat-card-title>
+        <div (click)="onRemoveItem(order)">
+            <span fxLayoutAlign="end" class="material-icons">close</span>
+        </div>
+    </mat-card-header>
+    <img
+        [src]="order.image" 
+        alt="{{ order.album }}">
+    <mat-card-content>
+        <div class="album">
+            <h3>{{ order.album }}</h3>
+        </div>
+    </mat-card-content>
+</mat-card>

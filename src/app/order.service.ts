@@ -5,42 +5,39 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable, from, Subject } from 'rxjs';
 
 import { Order } from './shared/models/Order';
-// import { AlbumInput } from './shared/models/AlbumInput';
+import { AlbumInput } from './shared/models/AlbumInput';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  // private onTheirWayCollection: AngularFirestoreCollection<Orders>;
-  // private preOrdersCollection: AngularFirestoreCollection<Orders>;
-  // onTheirWay$: Observable<Orders[]>;
-  // preOrders$: Observable<Orders[]>;
+
   private shippedCollection: AngularFirestoreCollection = {} as AngularFirestoreCollection;
   private preorderedCollection: AngularFirestoreCollection = {} as AngularFirestoreCollection;
-  shipped$: Observable<Order[]>;
-  preordered$: Observable<Order[]>;
+  shipped$: Observable<any>;
+  preordered$: Observable<any>;
 
   albumAdded$ = new Subject<boolean>();
 
   constructor(private afs: AngularFirestore) {
-    this.shippedCollection = afs.collection<Order>('onTheirWay');
-    this.preorderedCollection = afs.collection<Order>('preOrders');
+    this.shippedCollection = afs.collection<Order>('shipped');
+    this.preorderedCollection = afs.collection<Order>('preordered');
     this.shipped$ = this.shippedCollection.valueChanges({ idField: 'afId' });
     this.preordered$ = this.preorderedCollection.valueChanges({ idField: 'afId' });
   }
 
-  addToOrders(albumRes: any, formInput: AlbumInput) {
-    if (formInput.orderType === 'onTheirWay') {
-      const newOrder = {
-        id: albumRes.id.toString(), 
-        artistName: albumRes.artists[0].name, 
-        album: formInput.album, 
-        image: albumRes.images[0].url, 
-        orderType: formInput.orderType, 
-        trackingNum: formInput.trackingNum
-      };
+  
 
+  addToOrders(artist: string, formInput: AlbumInput) {
+    if (formInput.orderType === "shipped") {
+      const newOrder = {
+        artistName: artist, 
+        album: formInput.selectedAlbum.name, 
+        image: formInput.selectedAlbum.images[0].url, 
+        orderType: formInput.orderType, 
+        trackingNum: formInput.trackingNum 
+      }
       return from(this.shippedCollection.add(newOrder))
         .subscribe({
           next: (() => {
@@ -52,13 +49,12 @@ export class OrderService {
         });
     } else {
       const newOrder = {
-        id: albumRes.id.toString(), 
-        artistName: albumRes.artists[0].name, 
-        album: formInput.album, 
-        image: albumRes.images[0].url, 
+        artistName: artist, 
+        album: formInput.selectedAlbum.name, 
+        image: formInput.selectedAlbum.images[0].url, 
         orderType: formInput.orderType, 
-        date: formInput.date
-      }; 
+        date: formInput.date 
+      }
 
       return from(this.preorderedCollection.add(newOrder))
         .subscribe({
@@ -74,11 +70,11 @@ export class OrderService {
 
 
   deleteOrder(order: Order) {
-    if (order.orderType === 'onTheirWay') {
-      const orderRef = this.afs.doc('onTheirWay/' + order.afId);
+    if (order.orderType === 'shipped') {
+      const orderRef = this.afs.doc('shipped/' + order.afId);
       orderRef.delete();
     } else {
-      const orderRef = this.afs.doc('preOrders/' + order.afId);
+      const orderRef = this.afs.doc('preordered/' + order.afId);
       orderRef.delete();
     }
   }

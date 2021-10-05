@@ -1,0 +1,86 @@
+<h2 mat-dialog-title>{{ artist }}</h2>
+
+<mat-dialog-content 
+    fxLayout="column"
+    fxLayoutAlign="center">
+    <form [formGroup]="form">
+
+        <mat-form-field 
+            class="album-select">
+            <mat-label>Albums</mat-label>
+            <mat-select formControlName="selectedAlbum">
+                <mat-option 
+                    *ngFor="let album of albums" [value]="album"
+                    (click)="onAlbumSelect(album)">
+                    {{ album.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('selectedAlbum')!.touched">Please select an album</mat-error>
+        </mat-form-field>
+
+
+        <div
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            *ngIf="isAlbumSelected(selectedAlbum)">
+            <img
+                [src]="selectedAlbum.images[0].url" 
+                alt="{{ selectedAlbum.name }}">
+            <div class="album-description">
+                {{ selectedAlbum.name }}
+                <br>
+                Release Date: {{ selectedAlbum.release_date | date }}
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        
+        <mat-form-field 
+            class="order-select">
+            <mat-label>Order Type</mat-label>
+            <mat-select formControlName="orderType">
+                <mat-option value="shipped">Shipped</mat-option>
+                <mat-option value="preordered">Preordered</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('orderType')!.touched">Please select an order type</mat-error>
+        </mat-form-field>
+
+        
+        <app-input
+            *ngIf="form.get('orderType')!.value === 'shipped'"
+            [control]="form.get('trackingNum')"
+            label="Tracking Number"
+            placeholder="Copy and paste here..."
+            type="text"></app-input>
+
+        <mat-form-field 
+            *ngIf="form.get('orderType')!.value === 'preordered'">
+            <mat-label>Estimated Shipping Date</mat-label>
+            <input 
+                matInput 
+                [matDatepicker]="picker"
+                formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <p class="error" *ngIf="twoOrderTypes()">Please choose either a tracking number, or an estimated date. Otherwise, leave both blank</p>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions
+    fxLayout
+    fxLayoutAlign="end"
+    fxLayoutGap="5px">
+    <button 
+        mat-raised-button 
+        color="warn"
+        (click)="onCancel()">Cancel</button>
+
+    <button 
+        mat-raised-button 
+        color="primary"
+        [disabled]="!form.valid || twoOrderTypes()"
+        (click)="onSubmit()">Submit</button>
+</mat-dialog-actions> 

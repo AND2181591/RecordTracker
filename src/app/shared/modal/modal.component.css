@@ -1,0 +1,27 @@
+.mat-dialog-content {
+    padding: 0;
+}
+
+form {
+    overflow: auto;
+    padding: 0 24px;
+}
+
+.album-description {
+    text-align: center;
+    font-weight: 500;
+}
+
+.mat-divider, .order-select, button {
+    margin-top: 15px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 0;
+}
+
+.mat-dialog-actions {
+    margin-bottom: 5px;
+}
