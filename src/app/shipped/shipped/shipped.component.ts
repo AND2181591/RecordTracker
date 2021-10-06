@@ -12,8 +12,6 @@ import { Order } from 'src/app/shared/models/Order';
 })
 export class ShippedComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
-  trackingUrl: string = 'https://tools.usps.com/go/TrackConfirmAction_input?strOrigTrackNum=';
-
   orderSubscription: Subscription = {} as Subscription;
 
   constructor(private orderService: OrderService) { }
@@ -21,8 +19,13 @@ export class ShippedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.orderSubscription = this.orderService.shipped$
       .subscribe((orders) => {
+        console.log("Shipped Component: ", orders);
         this.orders = orders;
       });
+  }
+
+  onRemoveOrder(order: Order) {
+    this.orderService.deleteOrder(order);
   }
 
   ngOnDestroy() {

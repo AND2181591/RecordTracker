@@ -8,5 +8,13 @@ mat-card-header {
 
 .album h3 {
     margin: 5px;
+}
+
+.album {
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #222;
 }

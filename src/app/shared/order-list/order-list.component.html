@@ -17,6 +17,12 @@
     <mat-card-content>
         <div class="album">
             <h3>{{ order.album }}</h3>
+            <a 
+                *ngIf="order.trackingNum" 
+                [href]="order.trackingUrl + order.trackingNum" 
+                target="_blank">{{ order.trackingNum }}
+            </a>
+            <h3 *ngIf="order.date">{{ order.date | date:'mediumDate' }}</h3>
         </div>
     </mat-card-content>
 </mat-card>

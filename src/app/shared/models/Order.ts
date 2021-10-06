@@ -3,13 +3,15 @@ export interface Order {
     album: string;
     image: string;
     orderType: string;
-    trackingUrl?: string;
+    trackingUrl: string;
     trackingNum?: string; 
-    date?: {
-        day: number, 
-        month: number, 
-        year: number
-    };
+    date?: Date,
     late?: boolean;
     afId?: string;
 }
+
+// {
+//     day: number, 
+//     month: number, 
+//     year: number
+// }

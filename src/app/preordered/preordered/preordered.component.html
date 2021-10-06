@@ -1,10 +1,11 @@
 <div class="header">
     <h3>Preordered</h3>
-    <!-- <h6 *ngIf="orders.length > 0">These items have shipped or will ship soon!</h6>
+    <div *ngIf="orders.length > 0">These items have been ordered for a later date!</div>
     <div *ngIf="orders.length === 0">
-        No orders on the way...
-    </div> -->
+        No preorders available...
+    </div>
 </div>
 
 <app-order-list
-    [orders]="orders"></app-order-list>
+    [orders]="orders" 
+    (remove)="onRemoveOrder($event)"></app-order-list>
