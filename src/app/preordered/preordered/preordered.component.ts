@@ -13,27 +13,37 @@ import { Order } from 'src/app/shared/models/Order';
 export class PreorderedComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   preorderedSubscription: Subscription = {} as Subscription;
+  error: any;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
-    this.preorderedSubscription = this.orderService.preordered$
-      .pipe(
-        map((orders) => {
-          orders.sort((c: any, d: any) => {
-            return c.date - d.date;
-          });
+    this.getOrders();
+  }
 
-          const updatedOrders: Order[] = [];
-          for(let i = 0; i < orders.length; i++) {
-            orders[i].date = orders[i].date.toDate();
-            updatedOrders.push(orders[i]);
-          }
-          return updatedOrders;
-        })
-      ).subscribe((orders: Order[]) => {
-          this.orders = orders;
+
+  getOrders() {
+    this.preorderedSubscription = this.orderService.preordered$
+    .pipe(
+      map((orders) => {
+        orders.sort((c: any, d: any) => {
+          return c.date - d.date;
         });
+
+        const updatedOrders: Order[] = [];
+        for(let i = 0; i < orders.length; i++) {
+          orders[i].date = orders[i].date.toDate();
+          updatedOrders.push(orders[i]);
+        }
+        return updatedOrders;
+      })
+    ).subscribe((orders: Order[]) => {
+        this.orders = orders;
+        this.error = null;
+      }, 
+      error => {
+        this.error = error;
+      });
   }
 
   onRemoveOrder(order: Order) {
@@ -43,11 +53,4 @@ export class PreorderedComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.preorderedSubscription.unsubscribe();
   }
-
-
-  // results.sort((a, b) => {
-  //   const c = +new Date(a.date.year, a.date.month, a.date.day);
-  //   const d = +new Date(b.date.year, b.date.month, b.date.day);
-  //   return c - d;
-  // }
 }

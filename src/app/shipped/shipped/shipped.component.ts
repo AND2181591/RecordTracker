@@ -13,15 +13,24 @@ import { Order } from 'src/app/shared/models/Order';
 export class ShippedComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   orderSubscription: Subscription = {} as Subscription;
+  error: any;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.getOrders();
+  }
+
+  
+  getOrders() {
     this.orderSubscription = this.orderService.shipped$
-      .subscribe((orders) => {
-        console.log("Shipped Component: ", orders);
-        this.orders = orders;
-      });
+    .subscribe((orders) => {
+      this.orders = orders;
+      this.error = null;
+    }, 
+    error => {
+      this.error = error;
+    });
   }
 
   onRemoveOrder(order: Order) {

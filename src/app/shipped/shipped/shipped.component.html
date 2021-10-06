@@ -3,12 +3,18 @@
     <div *ngIf="orders.length > 0">
         These items have shipped or will ship soon!
     </div>
-    <!-- <h6 *ngIf="orders.length > 0">These items have shipped or will ship soon!</h6> -->
-    <div *ngIf="orders.length === 0">
+    <div *ngIf="orders.length === 0 && !error">
         No orders on the way...
+    </div>
+    <div *ngIf="error">
+        Do you have orders, but don't see them?
     </div>
 </div>
 
+
+<div class="refresh" *ngIf="error">
+    <button mat-raised-button (click)="getOrders()">Refresh</button>
+</div>
 <app-order-list
     [orders]="orders" 
     (remove)="onRemoveOrder($event)"></app-order-list>

@@ -9,9 +9,3 @@ export interface Order {
     late?: boolean;
     afId?: string;
 }
-
-// {
-//     day: number, 
-//     month: number, 
-//     year: number
-// }

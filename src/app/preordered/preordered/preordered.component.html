@@ -1,11 +1,17 @@
 <div class="header">
     <h3>Preordered</h3>
     <div *ngIf="orders.length > 0">These items have been ordered for a later date!</div>
-    <div *ngIf="orders.length === 0">
+    <div *ngIf="orders.length === 0 && !error">
         No preorders available...
+    </div>
+    <div *ngIf="error">
+        Do you have orders, but don't see them?
     </div>
 </div>
 
+<div class="refresh" *ngIf="error">
+    <button mat-raised-button (click)="getOrders()">Refresh</button>
+</div>
 <app-order-list
     [orders]="orders" 
     (remove)="onRemoveOrder($event)"></app-order-list>
