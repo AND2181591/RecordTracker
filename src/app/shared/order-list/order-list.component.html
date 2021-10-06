@@ -23,6 +23,7 @@
                 target="_blank">{{ order.trackingNum }}
             </a>
             <h3 *ngIf="order.date">{{ order.date | date:'mediumDate' }}</h3>
+            <h3 class="late" *ngIf="order.late">Late!</h3>
         </div>
     </mat-card-content>
 </mat-card>

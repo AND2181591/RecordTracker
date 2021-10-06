@@ -33,6 +33,10 @@ export class PreorderedComponent implements OnInit, OnDestroy {
         const updatedOrders: Order[] = [];
         for(let i = 0; i < orders.length; i++) {
           orders[i].date = orders[i].date.toDate();
+          if (orders[i].date < new Date()) {
+            orders[i].late = true;
+          }
+
           updatedOrders.push(orders[i]);
         }
         return updatedOrders;
