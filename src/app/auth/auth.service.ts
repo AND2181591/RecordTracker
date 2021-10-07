@@ -64,8 +64,6 @@ export class AuthService {
                 .then(() => {
                     this.router.navigateByUrl("/home");
                 });
-        }).catch((error) => {
-            window.alert(error.message)
         });
     }
 

@@ -14,15 +14,19 @@
         </mat-option>
     </mat-autocomplete>
 
-    <mat-error *ngIf="showErrors() && controlName === 'email'">
+    <mat-error *ngIf="controlName === 'email'">
         Please enter a valid email address
     </mat-error>
 
-    <mat-error *ngIf="showErrors() && controlName === 'username'">
+    <mat-error *ngIf="controlName === 'username'">
         Please enter a valid username
     </mat-error>
 
-    <mat-error *ngIf="showErrors() && controlName === 'password'">
+    <mat-error *ngIf="controlName === 'password'">
         Please enter a valid password
+    </mat-error>
+
+    <mat-error *ngIf="controlName === 'passwordConfirmation'">
+        Passwords need to match
     </mat-error>
 </mat-form-field>

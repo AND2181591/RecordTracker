@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../auth.service';
+import { MatchPassword } from '../validators/match-password';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,15 +31,20 @@ export class SignUpComponent implements OnInit {
       Validators.minLength(4), 
       Validators.maxLength(20)
     ])
-  });
+  }, [this.matchPassword.validate]);
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private matchPassword: MatchPassword
+  ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    this.authService.signUp(this.signUpForm.value)
+    console.log(this.signUpForm);
+    // this.authService.signUp(this.signUpForm.value)
   }
 
 }

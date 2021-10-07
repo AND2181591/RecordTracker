@@ -28,7 +28,10 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.signIn(this.signInForm.value);
+    this.authService.signIn(this.signInForm.value)
+      .catch(error => {
+        console.log("Sign in... ", error);
+      });
   }
 
 }
