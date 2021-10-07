@@ -33,8 +33,7 @@ export class SignUpComponent implements OnInit {
     ])
   }, [this.matchPassword.validate]);
 
-  constructor(
-    private fb: FormBuilder, 
+  constructor( 
     private authService: AuthService, 
     private matchPassword: MatchPassword
   ) { }
@@ -43,8 +42,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signUpForm);
-    // this.authService.signUp(this.signUpForm.value)
+    this.authService.signUp(this.signUpForm.value)
   }
 
 }

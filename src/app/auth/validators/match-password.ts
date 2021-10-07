@@ -10,5 +10,5 @@ export class MatchPassword implements Validator {
             return null;
         }
         return { passwordsDontMatch: true };
-    }
+    } 
 }
