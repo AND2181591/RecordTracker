@@ -10,12 +10,14 @@ import { MaterialModule } from '../material.module';
 import { ModalComponent } from './modal/modal.component';
 import { InputComponent } from './input/input.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
     InputComponent,
     ModalComponent,
-    OrderListComponent
+    OrderListComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule, 
@@ -29,7 +31,8 @@ import { OrderListComponent } from './order-list/order-list.component';
     MaterialModule, 
     InputComponent, 
     ModalComponent, 
-    OrderListComponent
+    OrderListComponent, 
+    AlertComponent
   ]
 })
 export class SharedModule { }

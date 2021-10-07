@@ -6,6 +6,7 @@
     
     <app-search (artist)="artist = $event"></app-search>
 
+    <app-alert *ngIf="added"></app-alert>
     <mat-card 
         fxLayout="column" 
         fxLayoutAlign="center center"

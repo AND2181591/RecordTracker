@@ -1,0 +1,20 @@
+.alert {
+    position: absolute;
+    background-color: green;
+    opacity: 0;
+    z-index: 1;
+    width: 70%;
+    padding: 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    animation: appear 5s ease;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

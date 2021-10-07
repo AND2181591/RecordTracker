@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { map } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { Album } from 'src/app/shared/models/Album';
 
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { OrderService } from 'src/app/order.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,8 +18,11 @@ import { OrderService } from 'src/app/order.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   artist: Artist = {} as Artist;
+  added: boolean = false;
+
+  alertSubscription: Subscription = {} as Subscription;
 
   constructor(
     private searchService: SearchService,
@@ -27,11 +31,16 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.alertSubscription = this.orderService.albumAdded$
+      .subscribe(added => {
+        this.added = added;
+      });
   }
 
 
   onArtistSelect(artist: Artist) {
     const { id } = artist;
+    this.added = false;
     
     this.searchService.getAuth()
       .subscribe(({ access_token }) => this.searchService.getAlbums(id.toString(), access_token)
@@ -76,5 +85,10 @@ export class HomeComponent implements OnInit {
           this.orderService.addToOrders(this.artist.name, album);
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.added = false;
+    this.alertSubscription.unsubscribe();
   }
 }
