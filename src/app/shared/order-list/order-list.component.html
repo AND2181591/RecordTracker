@@ -35,6 +35,7 @@
     <mat-card-content>
         <div class="album">
             <h3>{{ order.album }}</h3>
+            <h4 *ngIf="order.variant">{{ order.variant }}</h4>
             <a 
                 *ngIf="order.orderType === 'shipped' && order.trackingNum" 
                 [href]="order.trackingUrl + order.trackingNum" 

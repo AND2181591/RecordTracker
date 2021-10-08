@@ -33,13 +33,14 @@ export class OrderService {
     if (formInput.orderType === "shipped") {
       const trackingUrl = 'https://tools.usps.com/go/TrackConfirmAction_input?strOrigTrackNum=';
 
-      const newOrder = {
+      const newOrder: Order = {
         artistName: artist, 
         album: formInput.selectedAlbum.name, 
         image: formInput.selectedAlbum.images[0].url, 
         orderType: formInput.orderType, 
         trackingUrl: trackingUrl, 
-        trackingNum: formInput.trackingNum 
+        trackingNum: formInput.trackingNum, 
+        variant: formInput.variant
       }
       return from(this.shippedCollection.add(newOrder))
         .subscribe({
@@ -56,7 +57,8 @@ export class OrderService {
         album: formInput.selectedAlbum.name, 
         image: formInput.selectedAlbum.images[0].url, 
         orderType: formInput.orderType, 
-        date: formInput.date
+        date: formInput.date, 
+        variant: formInput.variant
       }
 
       return from(this.preorderedCollection.add(newOrder))

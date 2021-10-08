@@ -6,6 +6,7 @@ export interface Order {
     trackingUrl: string;
     trackingNum?: string; 
     date?: Date,
+    variant?: string;
     late?: boolean;
     afId?: string;
 }

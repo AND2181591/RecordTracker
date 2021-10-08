@@ -79,9 +79,10 @@ export class AuthService {
             }).then(() => {
                 this.router.navigateByUrl("/home");
             });
-        }).catch((error) => {
-            window.alert(error.message)
-        })
+        });
+        // .catch((error) => {
+        //     window.alert(error.message)
+        // })
     }
 
     // Send email verfificaiton when new user sign up

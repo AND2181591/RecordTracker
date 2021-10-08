@@ -23,6 +23,7 @@ export class ModalComponent implements OnInit {
   form = new FormGroup({
     selectedAlbum: new FormControl('', Validators.required), 
     orderType: new FormControl('', Validators.required), 
+    variant: new FormControl(''), 
     trackingNum: new FormControl(''), 
     date: new FormControl('')
   });

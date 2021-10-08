@@ -45,6 +45,14 @@
             <mat-error *ngIf="form.get('orderType')!.touched">Please select an order type</mat-error>
         </mat-form-field>
 
+
+        <app-input 
+            *ngIf="form.get('orderType')!.value" 
+            [control]="form.get('variant')" 
+            label="Variant Name/Description" 
+            placeholder="Ex. black, splatter, split..." 
+            type="text"></app-input>
+
         
         <app-input
             *ngIf="form.get('orderType')!.value === 'shipped'"

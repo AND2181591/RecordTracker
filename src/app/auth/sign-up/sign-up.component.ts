@@ -43,6 +43,9 @@ export class SignUpComponent implements OnInit {
 
   onSubmit() {
     this.authService.signUp(this.signUpForm.value)
+      .catch(error => {
+        alert(error);
+      });
   }
 
 }
