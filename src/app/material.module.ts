@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRippleModule } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatRippleModule } from '@angular/material/core';
         MatDatepickerModule, 
         MatNativeDateModule,
         MatMenuModule, 
-        MatRippleModule
+        MatRippleModule, 
+        MatProgressSpinnerModule
     ], 
     exports: [
         MatFormFieldModule, 
@@ -53,7 +55,8 @@ import { MatRippleModule } from '@angular/material/core';
         MatDatepickerModule, 
         MatNativeDateModule, 
         MatMenuModule, 
-        MatRippleModule
+        MatRippleModule, 
+        MatProgressSpinnerModule
     ]
 })
 export class MaterialModule {}

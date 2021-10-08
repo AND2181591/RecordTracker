@@ -13,11 +13,13 @@ import { Order } from 'src/app/shared/models/Order';
 export class ShippedComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   orderSubscription: Subscription = {} as Subscription;
+  spinner: boolean = false;
   error: any;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.spinner = true;
     this.getOrders();
   }
 
@@ -26,10 +28,12 @@ export class ShippedComponent implements OnInit, OnDestroy {
     this.orderSubscription = this.orderService.shipped$
     .subscribe((orders) => {
       this.orders = orders;
+      this.spinner = false;
       this.error = null;
     }, 
     error => {
       this.error = error;
+      this.spinner = false;
     });
   }
 

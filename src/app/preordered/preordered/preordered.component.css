@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.refresh {
+.refresh, mat-spinner {
     position: fixed;
     left: 50%;
     top: 50%;

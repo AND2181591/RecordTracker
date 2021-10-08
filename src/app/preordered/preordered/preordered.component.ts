@@ -16,11 +16,13 @@ export class PreorderedComponent implements OnInit, OnDestroy {
 
   moved: boolean = false;
   movedSubscription: Subscription = {} as Subscription;
+  spinner: boolean = false;
   error: any;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.spinner = true;
     this.getOrders();
 
     this.movedSubscription = this.orderService.albumAdded$
@@ -55,10 +57,12 @@ export class PreorderedComponent implements OnInit, OnDestroy {
     ).subscribe((orders: Order[]) => {
         this.orders = orders;
         this.moved = false;
+        this.spinner = false;
         this.error = null;
       }, 
       error => {
         this.error = error;
+        this.spinner = false;
       });
   }
 
