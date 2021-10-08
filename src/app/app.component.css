@@ -20,6 +20,14 @@ mat-list {
     color: black;
 }
 
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
 .container {
+    position: relative;
+    top: 60px;
     padding: 0 40px;
 }
