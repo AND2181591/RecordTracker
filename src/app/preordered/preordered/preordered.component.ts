@@ -36,8 +36,8 @@ export class PreorderedComponent implements OnInit, OnDestroy {
     this.preorderedSubscription = this.orderService.preordered$
     .pipe(
       map((orders) => {
-        orders.sort((c: any, d: any) => {
-          return c.date - d.date;
+        orders.sort((a: any, b: any) => {
+          return a.date - b.date;
         });
 
         const updatedOrders: Order[] = [];

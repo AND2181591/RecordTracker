@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { OrderService } from 'src/app/order.service';
 
@@ -26,7 +27,15 @@ export class ShippedComponent implements OnInit, OnDestroy {
   
   getOrders() {
     this.orderSubscription = this.orderService.shipped$
-    .subscribe((orders) => {
+    .pipe(
+      map((orders: Order[]) => {
+        return orders.sort((a: any, b: any) => {
+          const artistA = a.artistName.toUpperCase();
+          const artistB = b.artistName.toUpperCase();
+          return (artistA < artistB) ? -1 : (artistA > artistB) ? 1 : 0;
+        });
+      })
+    ).subscribe((orders) => {
       this.orders = orders;
       this.spinner = false;
       this.error = null;

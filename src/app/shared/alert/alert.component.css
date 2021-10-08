@@ -1,12 +1,13 @@
 .alert {
     position: absolute;
-    background-color: green;
+    background-color: #00c907;
     opacity: 0;
     z-index: 1;
     width: 70%;
     padding: 8px;
     border-radius: 4px;
     font-weight: 600;
+    text-align: center;
     animation: appear 5s ease;
 }
 
