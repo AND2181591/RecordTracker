@@ -14,6 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRippleModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatDividerModule, 
         MatDatepickerModule, 
         MatNativeDateModule,
+        MatMenuModule, 
+        MatRippleModule
     ], 
     exports: [
         MatFormFieldModule, 
@@ -47,7 +51,9 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatSelectModule, 
         MatDividerModule, 
         MatDatepickerModule, 
-        MatNativeDateModule
+        MatNativeDateModule, 
+        MatMenuModule, 
+        MatRippleModule
     ]
 })
 export class MaterialModule {}

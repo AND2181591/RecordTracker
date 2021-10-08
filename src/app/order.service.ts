@@ -74,6 +74,22 @@ export class OrderService {
   }
 
 
+  moveOrder(order: Order) {
+    this.deleteOrder(order);
+
+    order.orderType = 'shipped';
+    return from(this.shippedCollection.add(order))
+        .subscribe({
+          next: (() => {
+            this.albumAdded$.next(true);
+          }), 
+          error: (() => {
+            this.albumAdded$.next(false);
+          })
+        });
+  }
+
+
   deleteOrder(order: Order) {
     if (order.orderType === 'shipped') {
       const orderRef = this.afs.doc('shipped/' + order.afId);

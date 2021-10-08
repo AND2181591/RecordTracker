@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(query => this.searchService.getAuth()
-        .subscribe(({ access_token }) => this.searchService.searchMusic(query, "artist", access_token)
+        .subscribe(({ access_token }) => this.searchService.searchArtist(query, "artist", access_token)
           .subscribe((results) => {
             const artists = results.artists.items.slice(0, 5);
             this.results = [];
@@ -45,9 +45,6 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit(selection: Artist) {
-    // this.results = [];
-    // this.results.push(selection);
-
     this.artist.emit(selection);
   }
 

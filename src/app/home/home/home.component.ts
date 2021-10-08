@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { SearchService } from '../search.service';
+import { OrderService } from 'src/app/order.service';
 
 import { Artist } from 'src/app/shared/models/Artist';
 import { Album } from 'src/app/shared/models/Album';
 
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
-import { OrderService } from 'src/app/order.service';
-import { Subscription } from 'rxjs';
 
 
 @Component({

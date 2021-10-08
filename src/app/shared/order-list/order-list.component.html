@@ -7,10 +7,28 @@
         fxLayout="row"
         fxLayoutAlign="space-between">
         <mat-card-title>{{ order.artistName }}</mat-card-title>
-        <div (click)="onRemoveItem(order)">
-            <span fxLayoutAlign="end" class="material-icons">close</span>
+
+        <div [matMenuTriggerFor]="menu">
+            <mat-icon matRipple>more_vert</mat-icon>
         </div>
+        <mat-menu #menu="matMenu">
+            <button 
+                *ngIf="order.orderType === 'preordered'" 
+                mat-menu-item 
+                (click)="onMoveToShipped(order)">
+                <mat-icon>moving</mat-icon>
+                <span>Move to Shipped</span>
+            </button>
+            <button 
+                mat-menu-item 
+                (click)="onRemoveItem(order)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+            </button>
+        </mat-menu>
+
     </mat-card-header>
+
     <img
         [src]="order.image" 
         alt="{{ order.album }}">
@@ -18,12 +36,18 @@
         <div class="album">
             <h3>{{ order.album }}</h3>
             <a 
-                *ngIf="order.trackingNum" 
+                *ngIf="order.orderType === 'shipped' && order.trackingNum" 
                 [href]="order.trackingUrl + order.trackingNum" 
                 target="_blank">{{ order.trackingNum }}
             </a>
-            <h3 *ngIf="order.date">{{ order.date | date:'mediumDate' }}</h3>
-            <h3 class="late" *ngIf="order.late">Late!</h3>
+            <h3 
+                *ngIf="order.orderType === 'preordered' && order.date">
+                {{ order.date | date:'mediumDate' }}
+            </h3>
+            <h3 class="late" 
+                *ngIf="order.orderType === 'preordered' && order.late">
+                Late!
+            </h3>
         </div>
     </mat-card-content>
 </mat-card>

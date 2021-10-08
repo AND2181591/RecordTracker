@@ -50,7 +50,7 @@ export class SearchService {
   }
 
 
-  searchMusic(query: string, type = 'artist', authToken: string): Observable<Artists> {
+  searchArtist(query: string, type = 'artist', authToken: string): Observable<Artists> {
     
     let searchUrl = `${this.rootUrl}/v1/search?query=` + query + '&offset=0&limit=20&type=' + type + '&market=US';
 

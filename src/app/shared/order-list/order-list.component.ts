@@ -10,10 +10,15 @@ import { Order } from '../models/Order';
 export class OrderListComponent implements OnInit {
   @Input() orders: Order[] = [];
   @Output() remove = new EventEmitter();
+  @Output() moveToShipped = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onMoveToShipped(order: Order) {
+    this.moveToShipped.emit(order);
   }
 
   onRemoveItem(order: Order) {

@@ -6,6 +6,10 @@ mat-card-header {
     width: 100%;
 }
 
+mat-icon {
+    border-radius: 50%;
+}
+
 .album h3 {
     margin: 5px;
 }

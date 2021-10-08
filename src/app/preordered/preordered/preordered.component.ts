@@ -13,12 +13,20 @@ import { Order } from 'src/app/shared/models/Order';
 export class PreorderedComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   preorderedSubscription: Subscription = {} as Subscription;
+
+  moved: boolean = false;
+  movedSubscription: Subscription = {} as Subscription;
   error: any;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.getOrders();
+
+    this.movedSubscription = this.orderService.albumAdded$
+      .subscribe(moved => {
+        this.moved = moved;
+      });
   }
 
 
@@ -46,6 +54,7 @@ export class PreorderedComponent implements OnInit, OnDestroy {
       })
     ).subscribe((orders: Order[]) => {
         this.orders = orders;
+        this.moved = false;
         this.error = null;
       }, 
       error => {
@@ -53,11 +62,16 @@ export class PreorderedComponent implements OnInit, OnDestroy {
       });
   }
 
+  onMoveToShipped(order: Order) {
+    this.orderService.moveOrder(order);
+  }
+
   onRemoveOrder(order: Order) {
     this.orderService.deleteOrder(order);
   }
 
   ngOnDestroy() {
+    this.movedSubscription.unsubscribe();
     this.preorderedSubscription.unsubscribe();
   }
 }
