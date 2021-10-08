@@ -1,24 +1,60 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav>
         <mat-list>
-            <mat-list-item *ngIf="!isLoggedIn">
-                <a routerLink="/" class="nav" (click)="sidenav.close()">Sign In</a>
+            <mat-list-item
+                class="nav" 
+                matRipple
+                *ngIf="!isLoggedIn">
+                <mat-icon>login</mat-icon>
+                <span>
+                    <a routerLink="/" (click)="sidenav.close()">Sign In</a>
+                </span>
             </mat-list-item>
-            <mat-list-item *ngIf="!isLoggedIn">
-                <a routerLink="signup" class="nav" (click)="sidenav.close()">Sign Up</a>
+            <mat-list-item 
+                class="nav"
+                matRipple
+                *ngIf="!isLoggedIn">
+                <mat-icon>create</mat-icon>
+                <span>
+                    <a routerLink="signup" (click)="sidenav.close()">Sign Up</a>
+                </span>
             </mat-list-item>
 
-            <mat-list-item *ngIf="isLoggedIn">
-                <a routerLink="/home" class="nav" (click)="sidenav.close()">Home</a>
+            <mat-list-item 
+                class="nav"
+                matRipple
+                *ngIf="isLoggedIn">
+                <mat-icon>home</mat-icon>
+                <span>
+                    <a routerLink="/home" class="nav" (click)="sidenav.close()">Home</a>
+                </span>
             </mat-list-item>
-            <mat-list-item *ngIf="isLoggedIn">
-                <a routerLink="/shipped" class="nav" (click)="sidenav.close()">Shipped</a>
+            <mat-list-item 
+                class="nav"
+                matRipple
+                *ngIf="isLoggedIn">
+                <mat-icon>local_shipping</mat-icon>
+                <span>
+                    <a routerLink="/shipped" class="nav" (click)="sidenav.close()">Shipped</a>
+                </span>
             </mat-list-item>
-            <mat-list-item *ngIf="isLoggedIn">
-                <a routerLink="/preordered" class="nav" (click)="sidenav.close()">Preordered</a>
+            <mat-list-item 
+                class="nav"
+                matRipple
+                *ngIf="isLoggedIn">
+                <mat-icon>event</mat-icon>
+                <span>
+                    <a routerLink="/preordered" class="nav" (click)="sidenav.close()">Preordered</a>
+                </span>
             </mat-list-item>
-            <mat-list-item *ngIf="isLoggedIn">
-                <a routerLink="/signout" class="nav" (click)="sidenav.close()">Sign Out</a>
+            <mat-list-item 
+                class="nav"
+                matRipple
+                *ngIf="isLoggedIn">
+                <mat-icon>logout</mat-icon>
+                <span>
+                    <a routerLink="/signout" class="nav" (click)="sidenav.close()">Sign Out</a>
+                </span>
             </mat-list-item>
         </mat-list>
     </mat-sidenav>

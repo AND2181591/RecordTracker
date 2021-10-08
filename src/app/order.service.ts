@@ -58,8 +58,6 @@ export class OrderService {
         orderType: formInput.orderType, 
         date: formInput.date
       }
-      console.log("Form Input: ", formInput);
-      console.log("New Order: ", newOrder);
 
       return from(this.preorderedCollection.add(newOrder))
         .subscribe({
