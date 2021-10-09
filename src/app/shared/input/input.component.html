@@ -1,10 +1,10 @@
 <mat-form-field>
     <mat-label>{{ label }}</mat-label>
     <input
-        #search
+        #input
         matInput
         [formControl]="control"
-        [type]="type" 
+        [type]="type"
         [placeholder]="placeholder"
         [matAutocomplete]="auto">
 
@@ -14,21 +14,20 @@
         </mat-option>
     </mat-autocomplete>
 
-    <mat-error *ngIf="controlName === 'email'">
-        Please enter a valid email address
-    </mat-error>
+    <mat-error *ngIf="control.errors">
+        <mat-error *ngIf="control.errors.required">
+            Value is required
+        </mat-error>
+        <mat-error *ngIf="control.errors.email">
+            Please enter a valid email address
+        </mat-error>
 
-    <mat-error *ngIf="controlName === 'username'">
-        Please enter a valid username
-    </mat-error>
-
-    <mat-error *ngIf="controlName === 'password'">
-        Please enter a valid password
-    </mat-error>
-
-    <mat-error *ngIf="controlName === 'passwordConfirmation'">
-        Passwords need to match
+        <mat-error *ngIf="control.errors.minlength">
+            Please include at least {{ control.errors.minlength.requiredLength }} characters
+        </mat-error>
+        <mat-error *ngIf="control.errors.maxlength">
+            Please don't include more than {{ control.errors.maxlength.requiredLength }} characters
+        </mat-error>
     </mat-error>
 
 </mat-form-field>
-

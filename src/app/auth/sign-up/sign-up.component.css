@@ -3,6 +3,23 @@ h3 {
     margin-bottom: 0;
 }
 
+.passwordMatch {
+    color: #f44336;
+    font-size: 75%;
+    animation: matError .3s ease-out;
+}
+
+@keyframes matError {
+    0% {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
 button {
     margin-top: 5px;
 }

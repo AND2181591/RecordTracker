@@ -3,7 +3,6 @@ import {
   ElementRef, 
   EventEmitter, 
   Input, 
-  OnInit, 
   Output, 
   ViewChild 
 } from '@angular/core';
@@ -16,33 +15,24 @@ import { Artist } from '../models/Artist';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })
-export class InputComponent implements OnInit {
+export class InputComponent {
   @Input() control: FormControl | any;
-  @Input() controlName: string = '';
   @Input() label: string = '';
-  @Input() placeholder: string = '';
   @Input() type: string = '';
+  @Input() placeholder: string = '';
+
   @Input() options: Artist[] = [];
 
-  @ViewChild("search") search: ElementRef<HTMLInputElement> = {} as ElementRef;
+  @ViewChild("input") input: ElementRef<HTMLInputElement> = {} as ElementRef;
   @Output() selection = new EventEmitter();
 
   
   constructor() {
   }
 
-  ngOnInit(): void {
-  }
-
   onSelect(select: Artist) {
-    this.search.nativeElement.value = "";
-    this.search.nativeElement.blur();
+    this.input.nativeElement.value = "";
+    this.input.nativeElement.blur();
     this.selection.emit(select);
   }
-
-  showErrors() {
-    const { touched, dirty, errors, passwordsDontMatch } = this.control;
-    return touched && dirty && errors && passwordsDontMatch;
-  }
-
 }

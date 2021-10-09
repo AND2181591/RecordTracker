@@ -23,15 +23,15 @@ export class SignUpComponent implements OnInit {
     ]),  
     password: new FormControl('', [ 
       Validators.required, 
-      Validators.minLength(4), 
+      Validators.minLength(6), 
       Validators.maxLength(20)
     ]), 
     passwordConfirmation: new FormControl('', [ 
       Validators.required, 
-      Validators.minLength(4), 
+      Validators.minLength(6), 
       Validators.maxLength(20)
     ])
-  }, [this.matchPassword.validate]);
+  }, { validators: [this.matchPassword.validate] });
 
   constructor( 
     private authService: AuthService, 

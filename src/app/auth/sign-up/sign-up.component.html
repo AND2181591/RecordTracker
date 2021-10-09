@@ -8,7 +8,6 @@
 
     <app-input 
         [control]="signUpForm.get('email')"
-        controlName="email"
         label="Email" 
         type="email"
         placeholder="Ex. me@myemail.com">
@@ -16,27 +15,30 @@
 
     <app-input
         [control]="signUpForm.get('username')"
-        controlName="username"
         label="Username" 
         type="text" 
-        placeholder="Recordcollector">
+        placeholder="Ex. Recordcollector, MusicLover">
     </app-input>
 
     <app-input
         [control]="signUpForm.get('password')"
-        controlName="password"
         label="Password" 
         type="password" 
-        placeholder="Recordcollector">
+        placeholder="Enter your password">
     </app-input>
 
     <app-input
         [control]="signUpForm.get('passwordConfirmation')"
-        controlName="passwordConfirmation"
         label="Password Confirmation" 
         type="password" 
-        placeholder="Recordcollector">
+        placeholder="Please re-enter password">
     </app-input>
+
+    <ng-container *ngIf="signUpForm.errors && signUpForm.get('passwordConfirmation')!.dirty">
+        <div class="passwordMatch" *ngIf="signUpForm.errors.passwordsDontMatch">
+            Passwords need to match
+        </div>
+    </ng-container>
 
     <button 
         mat-raised-button 
