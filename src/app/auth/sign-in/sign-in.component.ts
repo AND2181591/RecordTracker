@@ -22,16 +22,15 @@ export class SignInComponent implements OnInit {
     ])
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    this.authService.signIn(this.signInForm.value)
-      .catch(error => {
-        console.log("Sign in... ", error);
-      });
+    this.authService.signIn(this.signInForm.value);
   }
 
 }

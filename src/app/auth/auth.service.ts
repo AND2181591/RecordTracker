@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from "@angular/router";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -7,6 +8,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Subject } from 'rxjs';
 
 import { User } from '../shared/models/User';
+import { ModalGenericComponent } from '../shared/modal-generic/modal-generic.component';
 
 
 interface SignUpForm {
@@ -34,7 +36,8 @@ export class AuthService {
         public afs: AngularFirestore,   // Inject Firestore service
         public afAuth: AngularFireAuth, // Inject Firebase auth service
         public router: Router,  
-        public ngZone: NgZone // NgZone service to remove outside scope warning
+        public ngZone: NgZone, // NgZone service to remove outside scope warning
+        private modalGen: MatDialog
     ) {    
         /* Saving user data in localstorage when 
         logged in and setting up null when logged out */
@@ -64,6 +67,8 @@ export class AuthService {
                 .then(() => {
                     this.router.navigateByUrl("/home");
                 });
+        }).catch(error => {
+            this.errorModal(error);
         });
     }
 
@@ -79,11 +84,11 @@ export class AuthService {
             }).then(() => {
                 this.router.navigateByUrl("/home");
             });
+        }).catch(error => {
+            this.errorModal(error);
         });
-        // .catch((error) => {
-        //     window.alert(error.message)
-        // })
     }
+
 
     // Send email verfificaiton when new user sign up
     // SendVerificationMail() { 
@@ -132,8 +137,6 @@ export class AuthService {
     }
 
 
-
-
     // Sign out 
     signOut() {
         return this.afAuth.signOut()
@@ -143,5 +146,29 @@ export class AuthService {
                 this.router.navigateByUrl("/");
             }
         );
+    }
+
+
+
+    private errorModal(error: any) {
+        const modalGenConfig = new MatDialogConfig();
+
+        modalGenConfig.disableClose = true;
+        modalGenConfig.autoFocus = true;
+
+        modalGenConfig.position = {
+          top: '50vh', 
+          left: '50vw'
+        }
+        modalGenConfig.panelClass = 'makeItMiddle';
+
+        modalGenConfig.minWidth = '200px';
+
+        modalGenConfig.data = {
+          type: 'Error', 
+          message: error.message
+        }
+
+        this.modalGen.open(ModalGenericComponent, modalGenConfig);
     }
 }

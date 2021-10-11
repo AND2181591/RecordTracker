@@ -16,7 +16,6 @@ export class PreorderedComponent implements OnInit, OnDestroy {
 
   moved: boolean = false;
   movedSubscription: Subscription = {} as Subscription;
-  
   spinner: boolean = false;
   error: any;
 

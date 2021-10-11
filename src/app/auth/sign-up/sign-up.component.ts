@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatchPassword } from '../validators/match-password';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -42,10 +43,6 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.signUp(this.signUpForm.value)
-      .catch(error => {
-        alert(error);
-      });
+    this.authService.signUp(this.signUpForm.value);
   }
-
 }

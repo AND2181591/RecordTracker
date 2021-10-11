@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
@@ -14,12 +15,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavComponent } from './nav/nav.component';
+
 import { ModalComponent } from './shared/modal/modal.component';
+import { ModalGenericComponent } from './shared/modal-generic/modal-generic.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,6 @@ import { ModalComponent } from './shared/modal/modal.component';
   ],
   providers: [],
   bootstrap: [AppComponent], 
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent, ModalGenericComponent]
 })
 export class AppModule { }

@@ -35,7 +35,7 @@
     </app-input>
 
     <ng-container *ngIf="signUpForm.errors && signUpForm.get('passwordConfirmation')!.dirty">
-        <div class="passwordMatch" *ngIf="signUpForm.errors.passwordsDontMatch">
+        <div class="error" *ngIf="signUpForm.errors.passwordsDontMatch">
             Passwords need to match
         </div>
     </ng-container>

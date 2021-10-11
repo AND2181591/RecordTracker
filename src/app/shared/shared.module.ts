@@ -11,13 +11,15 @@ import { ModalComponent } from './modal/modal.component';
 import { InputComponent } from './input/input.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { AlertComponent } from './alert/alert.component';
+import { ModalGenericComponent } from './modal-generic/modal-generic.component';
 
 @NgModule({
   declarations: [
     InputComponent,
     ModalComponent,
     OrderListComponent,
-    AlertComponent
+    AlertComponent,
+    ModalGenericComponent
   ],
   imports: [
     CommonModule, 
@@ -32,7 +34,8 @@ import { AlertComponent } from './alert/alert.component';
     InputComponent, 
     ModalComponent, 
     OrderListComponent, 
-    AlertComponent
+    AlertComponent, 
+    ModalGenericComponent
   ]
 })
 export class SharedModule { }

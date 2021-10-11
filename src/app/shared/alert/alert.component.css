@@ -1,9 +1,11 @@
 .alert {
-    position: absolute;
+    position: fixed;
+    top: 57px;
+    right: 0px;
     background-color: #00c907;
     opacity: 0;
     z-index: 1;
-    width: 70%;
+    width: 30%;
     padding: 8px;
     border-radius: 4px;
     font-weight: 600;
