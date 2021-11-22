@@ -20,28 +20,37 @@ export class OrderService {
 
   albumAdded$ = new Subject<boolean>();
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore
+  ) {
     this.shippedCollection = afs.collection<Order>('shipped');
     this.preorderedCollection = afs.collection<Order>('preordered');
     this.shipped$ = this.shippedCollection.valueChanges({ idField: 'afId' });
     this.preordered$ = this.preorderedCollection.valueChanges({ idField: 'afId' });
   }
 
+
+  private assembleOrder(artist: string, formInput: AlbumInput) {
+    const trackingUrl = 'https://tools.usps.com/go/TrackConfirmAction_input?strOrigTrackNum=';
+    const newOrder: Order = {
+      artistName: artist, 
+      album: formInput.selectedAlbum.name, 
+      image: formInput.selectedAlbum.images[0].url, 
+      orderType: formInput.orderType, 
+      trackingUrl: trackingUrl,  
+      trackingNum: formInput.trackingNum, 
+      date: formInput.date, 
+      variant: formInput.variant
+    }
+
+    return newOrder;
+  }
   
 
   addToOrders(artist: string, formInput: AlbumInput) {
-    if (formInput.orderType === "shipped") {
-      const trackingUrl = 'https://tools.usps.com/go/TrackConfirmAction_input?strOrigTrackNum=';
+    const newOrder = this.assembleOrder(artist, formInput);
 
-      const newOrder: Order = {
-        artistName: artist, 
-        album: formInput.selectedAlbum.name, 
-        image: formInput.selectedAlbum.images[0].url, 
-        orderType: formInput.orderType, 
-        trackingUrl: trackingUrl, 
-        trackingNum: formInput.trackingNum, 
-        variant: formInput.variant
-      }
+    if (newOrder.orderType === "shipped") {
       return from(this.shippedCollection.add(newOrder))
         .subscribe({
           next: (() => {
@@ -52,15 +61,6 @@ export class OrderService {
           })
         });
     } else {
-      const newOrder = {
-        artistName: artist, 
-        album: formInput.selectedAlbum.name, 
-        image: formInput.selectedAlbum.images[0].url, 
-        orderType: formInput.orderType, 
-        date: formInput.date, 
-        variant: formInput.variant
-      }
-
       return from(this.preorderedCollection.add(newOrder))
         .subscribe({
           next: (() => {
@@ -87,6 +87,17 @@ export class OrderService {
             this.albumAdded$.next(false);
           })
         });
+  }
+
+
+  editOrder(order: Order) {
+    if (order.orderType === 'shipped') {
+      const orderRef = this.afs.doc('shipped/' + order.afId);
+      orderRef.update(order);
+    } else {
+      const orderRef = this.afs.doc('preordered/' + order.afId);
+      orderRef.update(order);
+    }
   }
 
 

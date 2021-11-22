@@ -1,1 +1,37 @@
-<p>nav works!</p>
+<mat-list>
+    <div *ngIf="!isLoggedIn">
+        <app-nav-item 
+            [icon]="'login'" 
+            [itemHeader]="'Sign In'" 
+            [link]="'/'"
+            (click)="onClose()"></app-nav-item>
+        <app-nav-item
+            [icon]="'create'" 
+            [itemHeader]="'Sign Up'" 
+            [link]="'signup'"
+            (click)="onClose()"></app-nav-item>
+    </div>
+
+    <div *ngIf="isLoggedIn">
+        <app-nav-item 
+            [icon]="'home'" 
+            [itemHeader]="'Home'" 
+            [link]="'/home'"
+            (click)="onClose()"></app-nav-item>
+        <app-nav-item 
+            [icon]="'local_shipping'" 
+            [itemHeader]="'Shipped'" 
+            [link]="'/shipped'"
+            (click)="onClose()"></app-nav-item>
+        <app-nav-item 
+            [icon]="'event'" 
+            [itemHeader]="'Preordered'" 
+            [link]="'/preordered'"
+            (click)="onClose()"></app-nav-item>
+        <app-nav-item 
+            [icon]="'logout'" 
+            [itemHeader]="'Sign Out'" 
+            [link]="'/signout'"
+            (click)="onClose()"></app-nav-item>
+    </div>
+</mat-list>

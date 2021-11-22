@@ -11,22 +11,6 @@ mat-sidenav {
     width: 200px;
 }
 
-mat-list {
-    padding: 20px 10px;
-}
-
-.nav a {
-    text-decoration: none;
-    color: #444;
-    margin-left: 10px;
-}
-
-.nav a {
-    text-decoration: none;
-    color: black;
-    margin-left: 10px;
-}
-
 mat-toolbar {
     position: fixed;
     top: 0;

@@ -1,14 +1,18 @@
 <div class="header">
     <h3>Shipped</h3>
+
     <div *ngIf="orders.length > 0">
         These items have shipped or will ship soon!
     </div>
+
     <div *ngIf="orders.length === 0 && !spinner && !error">
         No orders on the way...
     </div>
+
     <div *ngIf="spinner">
         Loading your orders...
     </div>
+    
     <div *ngIf="error">
         Do you have orders, but don't see them?
     </div>

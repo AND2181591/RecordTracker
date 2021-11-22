@@ -22,9 +22,7 @@ export class SignInComponent implements OnInit {
     ])
   });
 
-  constructor(
-    private authService: AuthService
-  ) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
   }

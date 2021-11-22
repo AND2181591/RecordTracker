@@ -16,14 +16,17 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
+import { NavItemComponent } from './nav/nav-item/nav-item.component';
 
 import { ModalComponent } from './shared/modal/modal.component';
+import { ModalEditComponent } from './shared/modal-edit/modal-edit.component';
 import { ModalGenericComponent } from './shared/modal-generic/modal-generic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    NavItemComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,6 @@ import { ModalGenericComponent } from './shared/modal-generic/modal-generic.comp
   ],
   providers: [],
   bootstrap: [AppComponent], 
-  entryComponents: [ModalComponent, ModalGenericComponent]
+  entryComponents: [ModalComponent, ModalEditComponent, ModalGenericComponent]
 })
 export class AppModule { }

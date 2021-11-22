@@ -25,3 +25,16 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBuyr9JXgwAd0uucGS3vKqNq4QZf6PyE3o",
+//   authDomain: "recordtracker-f74c0.firebaseapp.com",
+//   databaseURL: "https://recordtracker-f74c0-default-rtdb.firebaseio.com",
+//   projectId: "recordtracker-f74c0",
+//   storageBucket: "recordtracker-f74c0.appspot.com",
+//   messagingSenderId: "516807977031",
+//   appId: "1:516807977031:web:3120edb8094d0770e32962",
+//   measurementId: "G-LVRBGXBK01"
+// };

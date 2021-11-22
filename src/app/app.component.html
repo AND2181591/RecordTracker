@@ -1,68 +1,11 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav>
-        
-        <mat-list>
-            <mat-list-item
-                class="nav" 
-                matRipple
-                *ngIf="!isLoggedIn">
-                <mat-icon>login</mat-icon>
-                <span>
-                    <a routerLink="/" (click)="sidenav.close()">Sign In</a>
-                </span>
-            </mat-list-item>
-            <mat-list-item 
-                class="nav"
-                matRipple
-                *ngIf="!isLoggedIn">
-                <mat-icon>create</mat-icon>
-                <span>
-                    <a routerLink="signup" (click)="sidenav.close()">Sign Up</a>
-                </span>
-            </mat-list-item>
-
-            <mat-list-item 
-                class="nav"
-                matRipple
-                *ngIf="isLoggedIn">
-                <mat-icon>home</mat-icon>
-                <span>
-                    <a routerLink="/home" class="nav" (click)="sidenav.close()">Home</a>
-                </span>
-            </mat-list-item>
-            <mat-list-item 
-                class="nav"
-                matRipple
-                *ngIf="isLoggedIn">
-                <mat-icon>local_shipping</mat-icon>
-                <span>
-                    <a routerLink="/shipped" class="nav" (click)="sidenav.close()">Shipped</a>
-                </span>
-            </mat-list-item>
-            <mat-list-item 
-                class="nav"
-                matRipple
-                *ngIf="isLoggedIn">
-                <mat-icon>event</mat-icon>
-                <span>
-                    <a routerLink="/preordered" class="nav" (click)="sidenav.close()">Preordered</a>
-                </span>
-            </mat-list-item>
-            <mat-list-item 
-                class="nav"
-                matRipple
-                *ngIf="isLoggedIn">
-                <mat-icon>logout</mat-icon>
-                <span>
-                    <a routerLink="/signout" class="nav" (click)="sidenav.close()">Sign Out</a>
-                </span>
-            </mat-list-item>
-        </mat-list>
+        <app-nav (close)="sidenav.close()"></app-nav>
     </mat-sidenav>
     <mat-sidenav-content>
         <main>
             <mat-toolbar>
-                <button mat-icon-button (click)="sidenav.open()" aria-label="Example icon-button with menu icon">
+                <button mat-icon-button (click)="sidenav.open()">
                     <mat-icon>menu</mat-icon>
                 </button>
                 <span>

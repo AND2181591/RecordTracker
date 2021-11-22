@@ -21,6 +21,12 @@
             </button>
             <button 
                 mat-menu-item 
+                (click)="onEdit(order)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+            </button>
+            <button 
+                mat-menu-item 
                 (click)="onRemoveItem(order)">
                 <mat-icon>delete</mat-icon>
                 <span>Delete</span>

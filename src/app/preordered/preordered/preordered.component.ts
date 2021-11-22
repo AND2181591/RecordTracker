@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { OrderService } from 'src/app/order.service';
 
 import { Order } from 'src/app/shared/models/Order';
@@ -16,6 +18,7 @@ export class PreorderedComponent implements OnInit, OnDestroy {
 
   moved: boolean = false;
   movedSubscription: Subscription = {} as Subscription;
+
   spinner: boolean = false;
   error: any;
 
@@ -36,22 +39,26 @@ export class PreorderedComponent implements OnInit, OnDestroy {
     this.preorderedSubscription = this.orderService.preordered$
     .pipe(
       map((orders) => {
+        // Sorts the fetched preorders by date
         orders.sort((a: any, b: any) => {
           return a.date - b.date;
         });
 
+        /* For loop with nested if statements to override Firebase's timestamp and assign the 
+        late property */
         const updatedOrders: Order[] = [];
         for(let i = 0; i < orders.length; i++) {
           if (orders[i].date) {
             orders[i].date = orders[i].date.toDate();
             if (orders[i].date < new Date()) {
               orders[i].late = true;
+            } else {
+              orders[i].late = false;
             }
           }
-          
-
           updatedOrders.push(orders[i]);
         }
+        
         return updatedOrders;
       })
     ).subscribe((orders: Order[]) => {

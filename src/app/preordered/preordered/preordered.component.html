@@ -1,12 +1,16 @@
 <div class="header">
     <h3>Preordered</h3>
+
     <div *ngIf="orders.length > 0">These items have been ordered for a later date!</div>
+
     <div *ngIf="orders.length === 0 && !spinner && !error">
         No preorders available...
     </div>
+
     <div *ngIf="spinner">
         Loading your orders...
     </div>
+
     <div *ngIf="error">
         Do you have orders, but don't see them?
     </div>

@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{ order.artistName }}</h2>
+
+<mat-dialog-content 
+    fxLayout="column"
+    fxLayoutAlign="center">
+    <form [formGroup]="editForm">
+
+        <app-input
+            [control]="editForm.get('variant')" 
+            label="Variant Name/Description" 
+            placeholder="Ex. black, splatter, split..." 
+            type="text"></app-input>
+
+        
+        <app-input
+            *ngIf="order.orderType === 'shipped'"
+            [control]="editForm.get('trackingNum')"
+            label="Tracking Number"
+            placeholder="Copy and paste here..."
+            type="text"></app-input>
+        
+
+        <mat-form-field 
+            *ngIf="order.orderType === 'preordered'">
+            <mat-label>Estimated Shipping Date</mat-label>
+            <input 
+                matInput 
+                [matDatepicker]="picker"
+                formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions
+    fxLayout
+    fxLayoutAlign="end"
+    fxLayoutGap="5px">
+    <button 
+        mat-raised-button 
+        color="warn"
+        (click)="onCancel()">Cancel</button>
+
+    <button 
+        mat-raised-button 
+        color="primary"
+        (click)="onSubmit()">Submit</button>
+</mat-dialog-actions> 
+

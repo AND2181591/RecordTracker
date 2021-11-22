@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       left: '50vw'
     }
     dialogConfig.panelClass = 'makeItMiddle';
-
+    
     dialogConfig.data = {
       artist: artistName, 
       albums: albums

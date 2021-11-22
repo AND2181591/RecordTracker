@@ -12,6 +12,7 @@ import { InputComponent } from './input/input.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { AlertComponent } from './alert/alert.component';
 import { ModalGenericComponent } from './modal-generic/modal-generic.component';
+import { ModalEditComponent } from './modal-edit/modal-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ModalGenericComponent } from './modal-generic/modal-generic.component';
     ModalComponent,
     OrderListComponent,
     AlertComponent,
-    ModalGenericComponent
+    ModalGenericComponent,
+    ModalEditComponent
   ],
   imports: [
     CommonModule, 

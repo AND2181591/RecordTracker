@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
@@ -29,14 +29,13 @@ interface SignInForm {
 })
 export class AuthService {
 
-    userData: any; // Save logged in user data
-    isUserData = new Subject<boolean>();
+    userData: any; // Save logged in user data when the user signs in
+    isUserData = new Subject<boolean>(); 
 
     constructor(
         public afs: AngularFirestore,   // Inject Firestore service
         public afAuth: AngularFireAuth, // Inject Firebase auth service
         public router: Router,  
-        public ngZone: NgZone, // NgZone service to remove outside scope warning
         private modalGen: MatDialog
     ) {    
         /* Saving user data in localstorage when 
@@ -55,75 +54,50 @@ export class AuthService {
         });
     }
 
+    // Returns true when user is logged in. Used for the Auth Guard.
+    get isLoggedIn(): boolean {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        return (user !== null) ? true : false;
+    }
 
+    get currentUser(): User {
+        return this.userData;
+    }
 
 
     // Sign in with email/password
     signIn(signInForm: SignInForm) {
         return this.afAuth.signInWithEmailAndPassword(signInForm.email, signInForm.password)
-        .then((result) => {
-            this.isUserData.next(true);
-            this.setUserData(result.user!)
-                .then(() => {
-                    this.router.navigateByUrl("/home");
-                });
-        }).catch(error => {
-            this.errorModal(error);
-        });
+            .then((result) => {
+                this.isUserData.next(true);
+                this.setUserData(result.user!)
+                    .then(() => {
+                        this.router.navigateByUrl("/home");
+                    });
+            }).catch(error => {
+                this.errorModal(error); // Modal Generic launches to inform the user
+            });
     }
 
 
     // Sign up with email/password
     signUp(signUpForm: SignUpForm) {
         return this.afAuth.createUserWithEmailAndPassword(signUpForm.email, signUpForm.password)
-        .then((result) => {
-            this.isUserData.next(true);
-            this.setUserData(result.user!);
-            result.user?.updateProfile({
-                displayName: signUpForm.username
-            }).then(() => {
-                this.router.navigateByUrl("/home");
+            .then((result) => {
+                this.isUserData.next(true);
+                this.setUserData(result.user!);
+                result.user?.updateProfile({
+                    displayName: signUpForm.username
+                }).then(() => {
+                    this.router.navigateByUrl("/home");
+                });
+            }).catch(error => {
+                this.errorModal(error); // Modal Generic launches to inform the user
             });
-        }).catch(error => {
-            this.errorModal(error);
-        });
     }
 
 
-    // Send email verfificaiton when new user sign up
-    // SendVerificationMail() { 
-    //     return this.afAuth.sendSignInLinkToEmail()
-    //         .then(() => {
-    //             this.router.navigate(['verify-email-address']);
-    //         })
-    // }
-
-
-
-
-    // Reset Forgot password
-    forgotPassword(passwordResetEmail: string) {
-        return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
-            .then(() => {
-                window.alert('Password reset email sent, check your inbox.');
-            }).catch((error) => {
-                window.alert(error)
-            }
-        );
-    }
-
-    // Returns true when user is logged in and email is verified
-    get isLoggedIn(): boolean {
-        const user = JSON.parse(localStorage.getItem('user') || 'null');
-        return (user !== null) ? true : false;
-    }
-
-
-
-
-    /* Setting up user data when sign in with username/password, 
-    sign up with username/password and sign in with social auth  
-    provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+    // Setting up user data when signin and signout methods run
     setUserData(user: User) {
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
         const userData: User = {
@@ -155,14 +129,12 @@ export class AuthService {
 
         modalGenConfig.disableClose = true;
         modalGenConfig.autoFocus = true;
-
+        modalGenConfig.minWidth = '200px';
         modalGenConfig.position = {
           top: '50vh', 
           left: '50vw'
         }
         modalGenConfig.panelClass = 'makeItMiddle';
-
-        modalGenConfig.minWidth = '200px';
 
         modalGenConfig.data = {
           type: 'Error', 

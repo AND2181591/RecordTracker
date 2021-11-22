@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -14,6 +15,7 @@ import { Order } from 'src/app/shared/models/Order';
 export class ShippedComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   orderSubscription: Subscription = {} as Subscription;
+  
   spinner: boolean = false;
   error: any;
 
