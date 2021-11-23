@@ -4,7 +4,8 @@
     (ngSubmit)="onSubmit()" 
     [formGroup]="signUpForm"
     fxLayout="column"
-    fxLayoutAlign="center center">
+    fxLayoutAlign="center center" 
+    [ngClass.gt-xs]="'large-form'">
 
     <app-input 
         [control]="signUpForm.get('email')"

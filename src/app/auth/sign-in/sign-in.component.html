@@ -4,7 +4,8 @@
     (ngSubmit)="onSubmit()" 
     [formGroup]="signInForm"
     fxLayout="column"
-    fxLayoutAlign="center center">
+    fxLayoutAlign="center center" 
+    [ngClass.gt-xs]="'large-form'">
 
     <app-input 
         [control]="signInForm.get('email')"

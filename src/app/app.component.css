@@ -22,3 +22,7 @@ mat-toolbar {
     top: 60px;
     padding: 0 40px;
 }
+
+.large-sidenav {
+    width: 300px;
+}

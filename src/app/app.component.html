@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav>
+    <mat-sidenav [ngClass.gt-xs]="'large-sidenav'" #sidenav>
         <app-nav (close)="sidenav.close()"></app-nav>
     </mat-sidenav>
     <mat-sidenav-content>
