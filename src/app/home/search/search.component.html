@@ -1,4 +1,6 @@
-<form [formGroup]="searchForm">
+<form 
+    [formGroup]="searchForm" 
+    [ngClass.gt-xs]="'large-form'">
 
     <app-input
         [control]="searchForm.get('query')"

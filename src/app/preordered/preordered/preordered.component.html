@@ -22,7 +22,8 @@
     <button mat-raised-button (click)="getOrders()">Refresh</button>
 </div>
 <app-alert *ngIf="moved" [alertMessage]="'Moved to Shipped!'"></app-alert>
-<app-order-list
+<app-order-list 
+    [ngClass.gt-xs]="'large-order-list'"
     [orders]="orders" 
     (moveToShipped)="onMoveToShipped($event)"
     (remove)="onRemoveOrder($event)"></app-order-list>

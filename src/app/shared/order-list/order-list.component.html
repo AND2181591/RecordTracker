@@ -2,6 +2,7 @@
     fxLayout="column"
     fxLayoutAlign="center center"
     class="order"
+    [ngClass.gt-xs]="'large-order'"
     *ngFor="let order of orders">
     <mat-card-header 
         fxLayout="row"

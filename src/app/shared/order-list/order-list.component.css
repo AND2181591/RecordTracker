@@ -1,5 +1,24 @@
 .order {
-    margin: 20px 0;
+    margin: 20px auto;
+    width: 240px;
+    opacity: 1;
+    animation: order-appear 2s ease;
+}
+
+@keyframes order-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+
+.large-order {
+    margin: 20px;
 }
 
 mat-card-header {
@@ -8,6 +27,7 @@ mat-card-header {
 
 mat-icon {
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .album h3 {

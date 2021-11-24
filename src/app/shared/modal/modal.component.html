@@ -3,7 +3,9 @@
 <mat-dialog-content 
     fxLayout="column"
     fxLayoutAlign="center">
-    <form [formGroup]="form">
+    <form 
+        [formGroup]="form"
+        [ngClass.gt-xs]="'modal-large'">
 
         <mat-form-field 
             class="album-select">

@@ -15,3 +15,9 @@ img {
 .makeItMiddle {
     transform: translate(-50%, -50%);
 }
+
+.large-order-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

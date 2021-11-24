@@ -24,5 +24,6 @@
     <button mat-raised-button (click)="getOrders()">Refresh</button>
 </div>
 <app-order-list
+    [ngClass.gt-xs]="'large-order-list'"
     [orders]="orders" 
     (remove)="onRemoveOrder($event)"></app-order-list>
